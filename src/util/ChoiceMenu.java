@@ -8,11 +8,11 @@ package util;
 import ReadToObject.ReadToObjectCompatitors;
 import WriteToObjectIO.WriteToObjectCompatitors;
 import beans.CompatitorsList;
-import beans.Login;
 import beans.Person;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentMap;
 
 import static main.Game.a;
 import static main.Game.b;
@@ -69,23 +69,24 @@ public class ChoiceMenu {
             choice(person);
         } else if (selected == 6) {
             System.out.println("Elave Etmek isdediyiniz ishdirakcilarin sayini qeyd edin");
-            int addCompatitor =scan.nextInt();
+            int addCompatitor = scan.nextInt();
             Person member[] = new Person[addCompatitor];
             CompatitorsList comp = new CompatitorsList();
-            for (int i = 0; i < addCompatitor; i++) {
-                member[i] =FillInPerson.personInformation();
+            for (int i = members; i < addCompatitor; i++) {
+                member[i] = FillInPerson.personInformation();
             }
-            comp.setPerson(member);
+            Person[] birlesme = (Person[]) concatenate(member, comp.getPerson());
+            comp.setPerson(birlesme);
             WriteToObjectCompatitors.writeToObjectCompatitorsUsingFileWriter(comp, "Ishtirakcilar");
             CompatitorsList compa = (CompatitorsList) ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Ishtirakcilar");
-            members = comp.getPerson().length+addCompatitor;
+            members = comp.getPerson().length + addCompatitor;
             if (members != 0) {
-
+                choice(person);
             }
 
         } else if (selected == 7) {
             if (members != 0) {
-                b=true;
+                b = true;
             }
 
         } else if (selected == 8) {
@@ -95,5 +96,16 @@ public class ChoiceMenu {
             System.out.println("Yalnish secim etdiniz!!!");
             choice(person);
         }
+    }
+
+    private static Object[] concatenate(Object[] a, Object[] b) {
+        Collection<Object> result = new ArrayList<Object>(a.length + b.length);
+        for (Object val : a) {
+            result.add(val);
+        }
+        for (Object val : b) {
+            result.add(val);
+        }
+        return result.toArray();
     }
 }
