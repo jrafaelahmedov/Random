@@ -3,8 +3,8 @@ package beans;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class CompatitorsList extends Person implements Serializable {
-    private Person[] person;
+public class CompatitorsList extends Human implements Serializable {
+    private Person[] person = null;
 
     public Person[] getPerson() {
         return person;

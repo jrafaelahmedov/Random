@@ -5,37 +5,30 @@
  */
 package util;
 
-import ReadToObject.ReadToObjectCompatitors;
 import WriteToObjectIO.WriteToObjectCompatitors;
 import beans.CompatitorsList;
-import beans.Login;
 import beans.Person;
 
 import java.util.Scanner;
+
 import static util.ChoiceMenu.members;
 
 /**
- *
  * @author RafaelAhmedov
  */
 public class FillInPerson {
 
-    public static Person personFilliIn(CompatitorsList person) {
+    public static Person personFilliIn(Person person) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Yarishmada nece shexs ishdirak edecek?");
         members = sc.nextInt();
         Person member[] = new Person[members];
-
+        CompatitorsList comp = new CompatitorsList();
         for (int i = 0; i < members; i++) {
             member[i] = personInformation();
-            person.setPerson(member);
         }
-
-//        CompatitorsList c =  new CompatitorsList();
-//        c.setPerson(member);
-        WriteToObjectCompatitors.writeToObjectCompatitorsUsingFileWriter(person,"Ishtirakcilar");
-        System.out.println("write"+person.toString());
-        ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Ishtirakcilar");
+        comp.setPerson(member);
+        WriteToObjectCompatitors.writeToObjectCompatitorsUsingFileWriter(comp, "Ishtirakcilar");
         return person;
     }
 

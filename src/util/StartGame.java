@@ -7,6 +7,8 @@ package util;
 
 import beans.CompatitorsList;
 import beans.Login;
+import beans.Person;
+
 import java.util.Random;
 import java.util.Scanner;
 import static main.Game.a;
@@ -18,7 +20,7 @@ import static util.ChoiceMenu.members;
  * @author RafaelAhmedov
  */
 public class StartGame {
-    public static void startmatch(CompatitorsList person) {
+    public static void startmatch(Person person) {
         Random random = new Random();
         Scanner scan = new Scanner(System.in);
         System.out.println("Sizce secilen ishtirakci kimdir?");
@@ -28,6 +30,7 @@ public class StartGame {
         while (a == true) {
             int customerSelectedNumber = scan.nextInt();
             if (((selectedMember - min) + 1) + min == customerSelectedNumber) {
+                Login l= new Login();
                 System.out.println("Congratulations you won!");
                 a = false;
             } else if (customerSelectedNumber > members || customerSelectedNumber == 0) {
@@ -39,5 +42,10 @@ public class StartGame {
                 return;
             }
         }
+    }
+
+
+    public static void pointSystem(){
+
     }
 }

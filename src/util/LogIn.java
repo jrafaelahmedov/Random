@@ -16,8 +16,6 @@ import static main.Game.a;
 public class LogIn {
     public static Login logIn() {
         Login l = new Login();
-        l.setUsername("Rafael");
-        l.setPassword("12345");
         Scanner scan = new Scanner(System.in);
         for (int i = 1; i <= 3; i++) {
             System.out.print("Daxil olun:\nUsername:");

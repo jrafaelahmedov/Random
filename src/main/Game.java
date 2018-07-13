@@ -6,6 +6,7 @@
 package main;
 
 import ReadToObject.ReadToObjectCompatitors;
+import WriteToObjectIO.WriteToObjectCompatitors;
 import beans.CompatitorsList;
 import beans.Login;
 import beans.Person;
@@ -13,28 +14,27 @@ import beans.Person;
 import java.util.ArrayList;
 
 /**
- *
  * @author RafaelAhmedov
  */
 public class Game {
 
     /**
-     * 
+     *
      */
     public static boolean a = true;
     public static boolean b = true;
 
     public static void main(String[] args) {
-
         while (a) {
             Login login = util.LogIn.logIn();
-            CompatitorsList comp = new CompatitorsList();
+            Person p = new Person();
+            CompatitorsList comp= new CompatitorsList();
             if (a) {
-                util.ChoiceMenu.choice(comp);
+                util.ChoiceMenu.choice(p);
                 if (b) {
-                    util.FillInPerson.personFilliIn(comp);
+                    util.FillInPerson.personFilliIn(p);
                     System.out.println("Yarishmacilar ugurla qeydiyyatdan kecdi!");
-                    util.StartGame.startmatch(comp);
+                    util.StartGame.startmatch(p);
                 }
             }
         }

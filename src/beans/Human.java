@@ -5,18 +5,20 @@
  */
 package beans;
 
+import java.io.Serializable;
+
 /**
  *
  * @author RafaelAhmedov
  */
-public class Human {
+public class Human implements Serializable {
     private String name;
     private String surname;
     private int age;
-    
+
 
     public Human() {
-    }  
+    }
 
     public Human(String name, String surname, int age) {
         this.name = name;

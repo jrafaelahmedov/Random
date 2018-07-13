@@ -6,11 +6,13 @@
 package util;
 
 import ReadToObject.ReadToObjectCompatitors;
+import WriteToObjectIO.WriteToObjectCompatitors;
 import beans.CompatitorsList;
 import beans.Login;
 import beans.Person;
 
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentMap;
 
 import static main.Game.a;
 import static main.Game.b;
@@ -21,22 +23,29 @@ import static main.Game.b;
 public class ChoiceMenu {
     public static int members;
 
-    public static void choice(CompatitorsList person) {
+    public static void choice(Person person) {
         Scanner scan = new Scanner(System.in);
         System.out.println("Növbəti əməliyyatı seçin:\n"
                 + "1.   Yarishmacilari register et\n"
                 + "2.	Yarışmaya başla\n"
                 + "3.	Logout\n"
                 + "4.	Exit\n"
-                + "5. Ishdirakcilarin Siyahisina Bax");
+                + "5. Ishdirakcilarin Siyahisina Bax\n"
+                + "6.  Yeni Ishdirakcilar Elave Et\n"
+                + "7. Butun Isdirakcilari Sil\n"
+                + "8. Topladigim Xallarimi Gosder \n");
         int selected = scan.nextInt();
         if (selected == 1) {
+            CompatitorsList comp = (CompatitorsList) ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Ishtirakcilar");
+            members = comp.getPerson().length;
             if (members != 0) {
                 System.out.println("Yarishmacilar artiq registr olunub!!");
                 choice(person);
             }
             b = true;
         } else if (selected == 2) {
+            CompatitorsList comp = (CompatitorsList) ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Ishtirakcilar");
+            members = comp.getPerson().length;
             if (members == 0) {
                 System.out.println("Zehmet olmasa Ishtirakcilari registr edin!!");
                 b = false;
@@ -53,13 +62,35 @@ public class ChoiceMenu {
             main.Game.a = false;
             main.Game.b = false;
         } else if (selected == 5) {
-
-           CompatitorsList comp=(CompatitorsList)ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Ishtirakcilar");
-            for (int i = 0; i <comp.getPerson().length; i++) {
-
-                System.out.println("read to choice "+comp.getPerson()[i].getName());
+            CompatitorsList comp = (CompatitorsList) ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Ishtirakcilar");
+            for (int i = 0; i < comp.getPerson().length; i++) {
+                System.out.println("String  " + comp.toString());
             }
             choice(person);
+        } else if (selected == 6) {
+            System.out.println("Elave Etmek isdediyiniz ishdirakcilarin sayini qeyd edin");
+            int addCompatitor =scan.nextInt();
+            Person member[] = new Person[addCompatitor];
+            CompatitorsList comp = new CompatitorsList();
+            for (int i = 0; i < addCompatitor; i++) {
+                member[i] =FillInPerson.personInformation();
+            }
+            comp.setPerson(member);
+            WriteToObjectCompatitors.writeToObjectCompatitorsUsingFileWriter(comp, "Ishtirakcilar");
+            CompatitorsList compa = (CompatitorsList) ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Ishtirakcilar");
+            members = comp.getPerson().length+addCompatitor;
+            if (members != 0) {
+
+            }
+
+        } else if (selected == 7) {
+            if (members != 0) {
+                b=true;
+            }
+
+        } else if (selected == 8) {
+
+
         } else {
             System.out.println("Yalnish secim etdiniz!!!");
             choice(person);
