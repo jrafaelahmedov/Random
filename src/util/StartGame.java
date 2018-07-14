@@ -5,18 +5,21 @@
  */
 package util;
 
+import ReadToObject.ReadToObjectCompatitors;
+import WriteToObjectIO.WriteToObjectCompatitors;
 import beans.CompatitorsList;
 import beans.Login;
 import beans.Person;
 
 import java.util.Random;
 import java.util.Scanner;
+
 import static main.Game.a;
+import static main.Game.b;
 import static util.ChoiceMenu.choice;
 import static util.ChoiceMenu.members;
 
 /**
- *
  * @author RafaelAhmedov
  */
 public class StartGame {
@@ -30,9 +33,16 @@ public class StartGame {
         while (a == true) {
             int customerSelectedNumber = scan.nextInt();
             if (((selectedMember - min) + 1) + min == customerSelectedNumber) {
-                Login l= new Login();
-                System.out.println("Congratulations you won!");
+                Login l = new Login();
+                Login login1 = (Login) ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Xallarim");
+                int cem = login1.getXal()+10;
+                login1.setXal(cem);
+                WriteToObjectCompatitors.writeToObjectCompatitorsUsingFileWriter(login1, "Xallarim");
+                Login login2 = (Login) ReadToObjectCompatitors.readToObjectCompatitorsUsingOutputStream("Xallarim");
+                System.out.println("Congratulations you won! you have " + login2.getXal() + " point");
                 a = false;
+                b = false;
+                return;
             } else if (customerSelectedNumber > members || customerSelectedNumber == 0) {
                 System.out.println("Secdiyiniz reqem ishdirakci sayi ile duz gelmir!!Zehmet olmasa duzgun secim edin!!");
             } else {
@@ -45,7 +55,7 @@ public class StartGame {
     }
 
 
-    public static void pointSystem(){
+    public static void pointSystem() {
 
     }
 }

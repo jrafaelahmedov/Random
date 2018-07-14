@@ -6,6 +6,8 @@
 package beans;
 
 
+import java.util.List;
+
 /**
  * @author RafaelAhmedov
  */
@@ -15,12 +17,12 @@ public class Login extends Person {
     private String password = "12345";
     private int xal = 0;
 
-    public void setXal(int xal) {
-        this.xal = xal;
-    }
-
     public int getXal() {
         return xal;
+    }
+
+    public void setXal(int xal) {
+        this.xal = xal;
     }
 
     public Login() {
