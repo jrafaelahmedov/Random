@@ -53,9 +53,4 @@ public class StartGame {
             }
         }
     }
-
-
-    public static void pointSystem() {
-
-    }
 }
